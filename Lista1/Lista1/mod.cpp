@@ -52,7 +52,7 @@ void print_irreg_2_dim(int** piTable, int sizeX, int* sizesY) {
 	}
 }
 
-void test_mod() {
+void test_mod_1() {
 	int* irregSizes = new int[5];
 
 	irregSizes[0] = 3;

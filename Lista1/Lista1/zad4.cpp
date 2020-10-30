@@ -37,10 +37,12 @@ CTable::CTable(CTable& otherTable) {
 	std::cout << "kopiuj: '" << name << "'" << std::endl;
 }
 
+#ifndef DESTRUCTOR_OFF
 CTable::~CTable() {
 	std::cout << "usuwam: '" << name << "'" << std::endl;
 	delete[] table;
 }
+#endif
 
 const std::string& CTable::get_name() {
 	return name;
@@ -81,13 +83,53 @@ bool CTable::set_new_size(int newLength) {
 	return true;
 }
 
+void CTable::set_value_at(int offset, int newVal) {
+	if (offset < 0 || offset >= size) {
+		return;
+	}
+	else {
+		table[offset] = newVal;
+	}
+}
+
 CTable* CTable::clone() {
-	CTable* clone = new CTable(this->get_name(), this->get_size());
-	for (int i = 0; i < this->get_size(); i++) {
+	CTable* clone = new CTable(name, size);
+	for (int i = 0; i < size; i++) {
 		clone->get_table()[i] = this->get_table()[i];
 	}
 	return clone;
 }
+
+void CTable::print_table() {
+	for (int i = 0; i < size; i++) {
+		std::cout << table[i] << " ";
+	}
+	std::cout << "\n";
+}
+
+CTable& CTable::operator+(CTable& tableToAdd) {
+	int newSize = size + tableToAdd.get_size();
+	CTable* outcome = new CTable(name + tableToAdd.get_name(), newSize);
+	for (int i = 0; i < size; i++) {
+		outcome->get_table()[i] = table[i];
+	}
+	for (int i = 0; i < tableToAdd.get_size(); i++) {
+		outcome->get_table()[size + i] = tableToAdd.get_table()[i];
+	}
+	return *outcome;
+}
+
+#ifdef EQUAL_COPY
+CTable& CTable::operator=(CTable& refToTable) {
+	name = refToTable.get_name();
+	size = refToTable.get_size();
+	table = new int[size];
+	for (int i = 0; i < size; i++) {
+		table[i] = refToTable.get_table()[i];
+	}
+	return *this;
+}
+#endif
 
 void mod_tab(CTable* cTab, int newSize) {
 	cTab->set_new_size(newSize);

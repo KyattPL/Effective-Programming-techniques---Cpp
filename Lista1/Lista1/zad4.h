@@ -16,14 +16,25 @@ public:
 	CTable();
 	CTable(const std::string& name, int tableLength);
 	CTable(CTable& otherTable);
+#ifndef DESTRUCTOR_OFF 
+
 	~CTable();
+
+#endif
 
 	const std::string& get_name();
 	int* get_table();
 	int get_size();
 	void set_name(const std::string& name);
 	bool set_new_size(int newLength);
+	void set_value_at(int offset, int newVal);
 	CTable* clone();
+	
+	void print_table();
+	CTable& operator+(CTable& tableToAdd);
+#ifdef EQUAL_COPY
+	CTable& operator=(CTable& refToTable);
+#endif
 };
 
 void mod_tab(CTable* cTab, int newSize);
