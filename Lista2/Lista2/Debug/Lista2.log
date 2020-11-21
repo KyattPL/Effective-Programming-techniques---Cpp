@@ -1,8 +1,0 @@
-﻿  NodeStatic.cpp
-c:\users\siema\desktop\uczelnia\tep\effective-programming-techniques---cpp\lista2\lista2\nodestatic.cpp(1): warning C4067: nieoczekiwane tokeny występujące po dyrektywie preprocesora - oczekiwano nowego wiersza
-c:\users\siema\desktop\uczelnia\tep\effective-programming-techniques---cpp\lista2\lista2\nodestatic.h(3): warning C4067: nieoczekiwane tokeny występujące po dyrektywie preprocesora - oczekiwano nowego wiersza
-c:\users\siema\desktop\uczelnia\tep\effective-programming-techniques---cpp\lista2\lista2\nodestatic.cpp(2): warning C4067: nieoczekiwane tokeny występujące po dyrektywie preprocesora - oczekiwano nowego wiersza
-c:\users\siema\desktop\uczelnia\tep\effective-programming-techniques---cpp\lista2\lista2\nodestatic.cpp(38): warning C4018: ">=": niezgodność typu ze znakiem/bez znaku
-c:\users\siema\desktop\uczelnia\tep\effective-programming-techniques---cpp\lista2\lista2\nodestatic.cpp(52): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-c:\users\siema\desktop\uczelnia\tep\effective-programming-techniques---cpp\lista2\lista2\nodestatic.cpp(66): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-  Lista2.vcxproj -> C:\Users\siema\Desktop\uczelnia\TEP\Effective-Programming-techniques---Cpp\Lista2\Debug\Lista2.exe
