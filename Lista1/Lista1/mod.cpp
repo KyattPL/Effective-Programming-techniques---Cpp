@@ -1,5 +1,6 @@
 #include <iostream>
 #include "mod.h"
+#include "zad4.h"
 
 int** allocateIrregularArray2D(int sizeX, int* sizesY) {
 	
@@ -65,4 +66,19 @@ void test_mod_1() {
 	fill_irreg_2_dim_with_zeros(irregArr, 5, irregSizes);
 	print_irreg_2_dim(irregArr, 5, irregSizes);
 	deallocateIrregularArray2D(irregArr, 5);
+}
+
+void test_mod_2() {
+	CTable tab("Mod2", 5);
+	tab.set_value_at(0, 1);
+	tab.set_value_at(1, 2);
+	tab.set_value_at(2, 3);
+	tab.set_value_at(3, 4);
+	tab.set_value_at(4, 5);
+
+	std::cout << tab << std::endl;
+	CTable added = tab + 130;
+	added.print_table();
+	CTable added2 = 15 + tab;
+	added2.print_table();
 }

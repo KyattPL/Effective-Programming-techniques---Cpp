@@ -2,6 +2,7 @@
 #define ZAD4_H
 
 #include <string>
+#include <iostream>
 
 const std::string DEFAULT_NAME = "Joe";
 const int DEFAULT_SIZE = 5;
@@ -15,7 +16,7 @@ private:
 public:
 	CTable();
 	CTable(const std::string& name, int tableLength);
-	CTable(CTable& otherTable);
+	CTable(const CTable& otherTable);
 #ifndef DESTRUCTOR_OFF 
 
 	~CTable();
@@ -31,11 +32,16 @@ public:
 	CTable* clone();
 	
 	void print_table();
+	CTable operator+(int element) const;
 	CTable& operator+(CTable& tableToAdd);
+	friend std::ostream& operator<<(std::ostream& os, CTable& tableToPrint);
 #ifdef EQUAL_COPY
 	CTable& operator=(CTable& refToTable);
 #endif
 };
+
+std::ostream& operator<<(std::ostream& os, CTable& tabletoPrint);
+CTable operator+(int element, const CTable& tableToExpand);
 
 void mod_tab(CTable* cTab, int newSize);
 void mod_tab(CTable cTab, int newSize);

@@ -2,11 +2,9 @@
 #include <iostream>
 #include <string>
 
-CTable::CTable() {
-	name = DEFAULT_NAME;
-	table = new int[DEFAULT_SIZE];
-	size = DEFAULT_SIZE;
-
+CTable::CTable() 
+	: name(DEFAULT_NAME), size(DEFAULT_SIZE), table(new int[DEFAULT_SIZE])
+{
 	std::cout << "bezp: '" <<  name << "'" << std::endl;
 }
 
@@ -26,7 +24,7 @@ CTable::CTable(const std::string& name, int tableLength)
 	std::cout << "parametr: '" << name << "'" << std::endl;
 }
 
-CTable::CTable(CTable& otherTable) {
+CTable::CTable(const CTable& otherTable) {
 	name = otherTable.name + "_copy";
 	size = otherTable.size;
 	table = new int[size];
@@ -101,35 +99,58 @@ CTable* CTable::clone() {
 }
 
 void CTable::print_table() {
-	for (int i = 0; i < size; i++) {
-		std::cout << table[i] << " ";
-	}
-	std::cout << "\n";
+	std::cout << *this;
 }
 
 CTable& CTable::operator+(CTable& tableToAdd) {
-	int newSize = size + tableToAdd.get_size();
-	CTable* outcome = new CTable(name + tableToAdd.get_name(), newSize);
+	int newSize = size + tableToAdd.size;
+	CTable* outcome = new CTable(name + tableToAdd.name, newSize);
 	for (int i = 0; i < size; i++) {
 		outcome->get_table()[i] = table[i];
 	}
-	for (int i = 0; i < tableToAdd.get_size(); i++) {
-		outcome->get_table()[size + i] = tableToAdd.get_table()[i];
+	for (int i = 0; i < tableToAdd.size; i++) {
+		outcome->get_table()[size + i] = tableToAdd.table[i];
 	}
 	return *outcome;
 }
 
 #ifdef EQUAL_COPY
 CTable& CTable::operator=(CTable& refToTable) {
-	name = refToTable.get_name();
-	size = refToTable.get_size();
+	name = refToTable.name;
+	size = refToTable.size;
 	table = new int[size];
 	for (int i = 0; i < size; i++) {
-		table[i] = refToTable.get_table()[i];
+		table[i] = refToTable.table[i];
 	}
 	return *this;
 }
 #endif
+
+std::ostream& operator<<(std::ostream& os, CTable& tableToPrint) {
+	std::cout << "[";
+	for (int i = 0; i < tableToPrint.size; i++) {
+		std::cout << tableToPrint.table[i];
+		if (i != tableToPrint.size - 1) {
+			std::cout << ", ";
+		}
+	}
+	std::cout << "]\n";
+	return os;
+}
+
+CTable CTable::operator+(int element) const {
+	int newSize = size + 1;
+	CTable newTab(name, newSize);
+	newTab.table[0] = element;	
+	for (int i = 1; i < newSize; i++) {
+		newTab.table[i] = table[i - 1];
+	}
+	return newTab;
+}
+
+CTable operator+(int element, const CTable& tableToExpand) {
+	return tableToExpand + element;
+}
 
 void mod_tab(CTable* cTab, int newSize) {
 	cTab->set_new_size(newSize);
